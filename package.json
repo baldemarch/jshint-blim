@@ -1,0 +1,29 @@
+{
+  "name": "blim-jshint",
+  "version": "0.0.1",
+  "description": "Blim's own jshint reporter",
+  "main": "blim-jshint.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baldemarch/jshint-blim"
+  },
+  "keywords": [
+    "gulp",
+    "jshint",
+    "reporter"
+  ],
+  "author": "Baldemar Roldan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baldemarch/jshint-blim/issues"
+  },
+  "homepage": "https://github.com/baldemarch/jshint-blim",
+  "peerDependencies": {
+    "gulp": "*",
+    "gulp-jshint": "*"
+  },
+  "devDependencies": {
+    "gulp-jshint": "^1.12.0",
+    "gulp-util": "^3.0.7"
+  }
+}
