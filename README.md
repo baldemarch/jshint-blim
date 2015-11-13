@@ -4,7 +4,7 @@
 
 npm install blim-jshint
 
-##Usage
+## Usage
 
 ```javascript
 var gulp = require('gulp');
