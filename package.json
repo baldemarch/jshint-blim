@@ -22,7 +22,7 @@
     "gulp": "*",
     "gulp-jshint": "*"
   },
-  "devDependencies": {
+  "dependencies": {
     "gulp-jshint": "^1.12.0",
     "gulp-util": "^3.0.7",
     "chalk": "^1.1.1",
