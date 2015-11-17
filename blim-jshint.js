@@ -16,26 +16,61 @@ module.exports = {
 		options = options || {};
 
 		var colors = {};
-		if(fs.existsSync(path.resolve('.stylishcolors'))) {
-			var rc = fs.readFileSync('.stylishcolors', { encoding: 'utf8' });
-			colors = JSON.parse(rc);
-		}
 
 		colors = extend({
-			'meta': 'gray',
-			'reason': 'blue',
-			'verbose': 'gray',
-			'error': 'red',
-			'noproblem': 'green'
+			'meta'       : 'gray',
+			'warning'    : 'magenta',
+			'verbose'    : 'gray',
+			'error'      : 'yellow',
+			'nocritical' : 'cyan',
+			'noproblem'  : 'green',
+			'total'      : 'blue'
 		}, colors);
 
 		ret += table(result.map(function (el, i) {
+
+			var customError = [
+				{
+					regex  : "^Expected \'",
+					color  : "error",
+					icon   : "✖"
+				},
+				{
+					regex  : "(?:defined)+",
+					color  : "warning",
+		 			icon   : "!"
+				}
+			];
+
+			function checkCustomErrors(error) {
+				for(i = 0; i < customError.length; i++) {
+					var pattern = new RegExp(customError[i].regex, 'igm');
+
+					var matchResult = error.match(pattern);
+
+					if (matchResult) {
+					  var matchedResult = customError[i];
+						return matchedResult;
+					} else {
+						var matchedResult = {
+							'color': 'nocritical',
+							'icon' : '-'
+						};
+					}
+				}
+				return matchedResult;
+			}
+
 			var err = el.error;
-			var line = [
+			var line = [];
+
+			var customColor = checkCustomErrors(err.reason);
+
+			line = [
 				'',
 				chalk[colors.meta]('line ' + err.line),
 				chalk[colors.meta]('col ' + err.character),
-				chalk[colors.reason]('✖ '+err.reason)
+				chalk[colors[customColor.color]](customColor.icon + ' '+err.reason)
 			];
 
 			if (el.file !== prevfile) {
@@ -54,7 +89,7 @@ module.exports = {
 		}).join('\n') + '\n\n';
 
 		if (total > 0) {
-			ret += chalk[colors.error].bold('✖ ' + total + ' problem' + (total === 1 ? '' : 's'));
+			ret += chalk[colors.total].bold(' ✖ ' + total + (total === 1 ? ' problem' : ' problems'));
 		} else {
 			ret += chalk[colors.noproblem].bold('✔ No problems');
 			ret = '\n' + ret.trim();
