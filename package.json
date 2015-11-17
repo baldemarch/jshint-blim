@@ -1,6 +1,6 @@
 {
   "name": "blim-jshint",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Blim's own jshint reporter",
   "main": "blim-jshint.js",
   "repository": {
