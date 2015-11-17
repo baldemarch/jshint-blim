@@ -18,11 +18,11 @@ module.exports = {
 		var colors = {};
 
 		colors = extend({
-			'meta'       : 'gray',
+			'meta'       : 'white',
 			'warning'    : 'magenta',
 			'verbose'    : 'gray',
 			'error'      : 'yellow',
-			'nocritical' : 'cyan',
+			'nocritical' : 'gray',
 			'noproblem'  : 'green',
 			'total'      : 'blue'
 		}, colors);
@@ -43,13 +43,13 @@ module.exports = {
 			];
 
 			function checkCustomErrors(error) {
-				for(i = 0; i < customError.length; i++) {
-					var pattern = new RegExp(customError[i].regex, 'igm');
+				for(var j = 0; j < customError.length; j++) {
+					var pattern = new RegExp(customError[j].regex, 'igm');
 
 					var matchResult = error.match(pattern);
 
 					if (matchResult) {
-					  var matchedResult = customError[i];
+					  var matchedResult = customError[j];
 						return matchedResult;
 					} else {
 						var matchedResult = {
@@ -68,8 +68,8 @@ module.exports = {
 
 			line = [
 				'',
-				chalk[colors.meta]('line ' + err.line),
-				chalk[colors.meta]('col ' + err.character),
+				chalk[colors.meta].dim('line ' + err.line),
+				chalk[colors.meta].dim('col ' + err.character),
 				chalk[colors[customColor.color]](customColor.icon + ' '+err.reason)
 			];
 
@@ -85,7 +85,7 @@ module.exports = {
 
 			return line;
 		})).split('\n').map(function (el, i) {
-			return headers[i] ? '\n' + chalk.underline(headers[i]) + '\n' + el : el;
+			return headers[i] ? '\n' + 'File: ' + chalk.underline(headers[i]) + '\n' + el : el;
 		}).join('\n') + '\n\n';
 
 		if (total > 0) {
