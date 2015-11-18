@@ -18,15 +18,13 @@
     "url": "https://github.com/baldemarch/jshint-blim/issues"
   },
   "homepage": "https://github.com/baldemarch/jshint-blim",
-  "peerDependencies": {
-    "gulp": "*",
-    "gulp-jshint": "*"
-  },
   "dependencies": {
-    "gulp-jshint": "^1.12.0",
-    "gulp-util": "^3.0.7",
     "chalk": "^1.1.1",
     "text-table": "^0.2.0",
     "util-extend": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp-jshint": "^1.12.0",
+    "jshint": "^2.9.0"
   }
 }
